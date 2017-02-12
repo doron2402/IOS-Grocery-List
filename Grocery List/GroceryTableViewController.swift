@@ -51,7 +51,13 @@ class GroceryTableViewController: UITableViewController {
             
         }
         
+        alertController.addTextField { (textField: UITextField) in
+            
+        }
+        
         let addAction = UIAlertAction(title: "ADD", style: UIAlertActionStyle.default) { [weak self] (action: UIAlertAction) in
+            
+            let quantityString: String?
             
             let itemString: String?
             if(alertController.textFields?.first?.text != "") {
@@ -61,8 +67,16 @@ class GroceryTableViewController: UITableViewController {
                 return
             }
             
+            // Check for quantity
+            if (alertController.textFields?[1].text != "") {
+                quantityString = alertController.textFields?[1].text
+            } else {
+                return
+            }
+            
             let grocery = Grocery(context: (self?.managedObjectContext)!)
             grocery.item = itemString
+            grocery.quantity = quantityString
             
             do {
                 try self?.managedObjectContext?.save()
@@ -102,7 +116,7 @@ class GroceryTableViewController: UITableViewController {
     
         
         let grocery = self.groceries[indexPath.row]
-        cell.textLabel?.text = grocery.item
+        cell.textLabel?.text = String(describing: grocery.item) + String(describing: grocery.quantity)
 
         return cell
     }
