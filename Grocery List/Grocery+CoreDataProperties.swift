@@ -16,5 +16,6 @@ extension Grocery {
     }
 
     @NSManaged public var item: String?
+    @NSManaged public var quantity: String?
 
 }
