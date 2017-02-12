@@ -42,6 +42,11 @@
                         </connections>
                     </tableView>
                     <navigationItem key="navigationItem" title="Grocery List" id="KXa-Ar-ZU1">
+                        <barButtonItem key="leftBarButtonItem" systemItem="trash" id="dqC-NK-hQP">
+                            <connections>
+                                <action selector="deleteAction:" destination="mYy-jh-vAT" id="cH7-vi-vot"/>
+                            </connections>
+                        </barButtonItem>
                         <barButtonItem key="rightBarButtonItem" systemItem="add" id="wDN-fr-PhZ">
                             <connections>
                                 <action selector="addAction:" destination="mYy-jh-vAT" id="vJH-wR-Ugf"/>

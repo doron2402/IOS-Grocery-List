@@ -44,6 +44,13 @@ class GroceryTableViewController: UITableViewController {
         tableView.reloadData()
     }
 
+    @IBAction func deleteAction(_ sender: UIBarButtonItem) {
+        print("remove item")
+        let cellIndex = 0
+        self.groceries.remove(at: cellIndex)
+//        loadData()
+        
+    }
     @IBAction func addAction(_ sender: UIBarButtonItem) {
         let alertController = UIAlertController(title: "Grocery Item", message: "What's to buy now?", preferredStyle: UIAlertControllerStyle.alert)
         
@@ -58,8 +65,8 @@ class GroceryTableViewController: UITableViewController {
         let addAction = UIAlertAction(title: "ADD", style: UIAlertActionStyle.default) { [weak self] (action: UIAlertAction) in
             
             let quantityString: String?
-            
             let itemString: String?
+            
             if(alertController.textFields?.first?.text != "") {
                 itemString = alertController.textFields?.first?.text
             }
@@ -71,7 +78,7 @@ class GroceryTableViewController: UITableViewController {
             if (alertController.textFields?[1].text != "") {
                 quantityString = alertController.textFields?[1].text
             } else {
-                return
+                quantityString = "1"
             }
             
             let grocery = Grocery(context: (self?.managedObjectContext)!)
@@ -116,7 +123,7 @@ class GroceryTableViewController: UITableViewController {
     
         
         let grocery = self.groceries[indexPath.row]
-        cell.textLabel?.text = String(describing: grocery.item) + String(describing: grocery.quantity)
+        cell.textLabel?.text = grocery.item! + " " + String(describing: grocery.quantity)
 
         return cell
     }
